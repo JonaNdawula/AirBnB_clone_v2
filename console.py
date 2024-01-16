@@ -35,14 +35,16 @@ class HBNBCommand(cmd.Cmd):
             "name"
         ],
         "State": ["id", "created_at", "updated_at", "name"],
-        "Place": ["id", "created_at", "updated_at", "city_id",
+        "Place": [
+            "id", "created_at", "updated_at", "city_id",
             "user_id", "name", "description", "number_rooms",
             "number_bathrooms", "max_guest", "price_by_night",
             "latitude", "longitude", "amenity_ids"
         ],
         "Amenity": ["id", "created_at", "updated_at", "name"],
-        "Review": ["id", "created_at", "updated_at", "place_id",
-           "user_id", "text"] 
+        "Review": [
+            "id", "created_at", "updated_at", "place_id",
+            "user_id", "text"]
 
     }
 
@@ -97,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
                 if pline:
                     # check for *args or **kwargs
                     if (pline[0] == "{" and pline[-1] == "}"
-                        and type(eval(pline)) is dict):
+                            and type(eval(pline)) is dict):
                         _args = pline
                     else:
                         _args = pline.replace(",", "")
@@ -142,7 +144,7 @@ class HBNBCommand(cmd.Cmd):
         """
         value_valid = True
 
-        if len(value) >=2 and value[0] == '"'\
+        if len(value) >= 2 and value[0] == '"'\
                 and value[len(value) - 1] == '"':
             value = value[1:-1]
             value = value.replace("_", " ")
@@ -171,7 +173,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
         new_instance = HBNBCommand.classes[name_of_class]()
-        for parameter_indx in range(1,len(argument_array)):
+        for parameter_indx in range(1, len(argument_array)):
             parameter_arr = argument_array[parameter_indx].split("=")
             if len(parameter_arr) == 2:
                 ky = parameter_arr[0]
@@ -184,7 +186,7 @@ class HBNBCommand(cmd.Cmd):
                 pass
         new_instance.save()
         print(new_instance.id)
-        
+
     def help_create(self):
         """ Help information for the create method """
         print("Creates a class of any type")
@@ -283,7 +285,7 @@ class HBNBCommand(cmd.Cmd):
         """Count current number of class instances"""
         count = 0
         for k, v in storage.all().items():
-            if args == k.split("."[0]:
+            if args == k.split(".")[0]:
                 count += 1
         print(count)
 
@@ -378,6 +380,7 @@ class HBNBCommand(cmd.Cmd):
         """ Help information for the update class """
         print("Updates an object with new information")
         print("Usage: update <className> <id> <attName> <attVal>\n")
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
