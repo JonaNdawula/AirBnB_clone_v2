@@ -10,5 +10,5 @@ class test_console(unittest.TestCase):
     """
     doc doc
     """
-    def test_documentstion(self):
+    def test_documentation(self):
         self.assertIsNotNone(console.__doc__)
