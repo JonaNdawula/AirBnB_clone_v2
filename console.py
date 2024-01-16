@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
         "User": [
             "id", "created_at", "updated_at",
             "email", "password", "first_name", "last_name"
-        ]
+        ],
         "City": [
             "id", "created_at", "updated_at", "state_id",
             "name"
@@ -333,7 +333,7 @@ class HBNBCommand(cmd.Cmd):
                 args.append(v)
         else:  # isolate args
             args = args[2]
-            if args and args[0] is '"':  # check for quoted arg
+            if args and args[0] == '"':  # check for quoted arg
                 second_quote = args.find('"', 1)
                 att_name = args[1:second_quote]
                 args = args[second_quote + 1:]
