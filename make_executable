@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# This script makes files executable using extensions
+echo "Enter file Extension to be executed"
+read file_extension 
+
+chmod u+x *.$file_extension

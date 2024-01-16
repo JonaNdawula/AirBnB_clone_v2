@@ -30,7 +30,8 @@ class HBNBCommand(cmd.Cmd):
             "id", "created_at", "updated_at",
             "email", "password", "first_name", "last_name"
         ]
-        "City": ["id", "created_at", "updated_at", "state_id",
+        "City": [
+            "id", "created_at", "updated_at", "state_id",
             "name"
         ],
         "State": ["id", "created_at", "updated_at", "name"],
