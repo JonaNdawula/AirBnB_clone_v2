@@ -23,17 +23,17 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs) -> None:
         """Initialization of BaseModel"""
-            self.id = str(uuid.uuid4())
-            self.created_at = datetime.now()
-            self.updated_at = datetime.now()
-            if kwargs:
-                for key, value in kwargs.items():
-                    if key in ["created_at", "update_at"]:
-                        date = datetime.datetime.strptime(
-                            value, "%Y-%m-%dT%H:%M:%S.%f")
-                        setattr(self, key, date)
-                    elif key != "__class___":
-                        setattr(self, key, value)
+        self.id = str(uuid.uuid4())
+        self.created_at = datetime.datetime.now()
+        self.updated_at = datetime.datetime.now()
+        if kwargs:
+            for key, value in kwargs.items():
+                if key in ["created_at", "update_at"]:
+                    date = datetime.datetime.strptime(
+                        value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, date)
+                elif key != "__class___":
+                    setattr(self, key, value)
 
     def __str__(self):
         """Returns a string representation of the instance"""
@@ -43,7 +43,7 @@ class BaseModel:
     def save(self):
         """Updates updated_at with current time when instance is changed"""
         from models import storage
-        self.updated_at = datetime.now()
+        self.updated_at = datetime.datetime.now()
         storage.save()
 
     def to_dict(self):

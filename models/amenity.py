@@ -11,9 +11,9 @@ str_type = getenv("HBNB_TYPE_STORAGE")
 class Amenity(BaseModel, Base):
     """ document doc"""
     __tablename__ = 'amenities'
-    if storage_type == 'db':
+    if str_type == 'db':
         name = Column(String(128), nullable=False)
-        place-_amenities = relationship(
+        place_amenities = relationship(
             'Place', secondary='place_amenity',
             back_populates="amenities")
     else:
