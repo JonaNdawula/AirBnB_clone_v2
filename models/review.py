@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, Text, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
 
-str_type = getenv("HBNB_TYPE_STRORAGE")
+str_type = getenv("HBNB_TYPE_STORAGE")
 
 
 class Review(BaseModel, Base):

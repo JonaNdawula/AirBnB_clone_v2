@@ -62,3 +62,37 @@ class Place(BaseModel, Base):
         latitude = 0.0
         longitude = 0.0
         amenity_ids = []
+
+    @property
+    def amenities(self):
+        """
+        gets doc
+        """
+        from models import storage
+        amens = []
+        allAmens = storage.all(Amenity)
+        for amen in allAmens.values():
+            if amen.id in self.amenity_ids:
+                amens.append(amen)
+        return amens
+
+    @property
+    def reviews(self):
+        """
+        gets doc
+        """
+        from models import storage
+        list_of_reviews = []
+        all_reviews = storage.all(Review)
+        for review in all_reviews.values():
+            if review.place_id in self.id:
+                list_of_review.append(review)
+        return list_of_reviews
+
+    @amenities.setter
+    def amenities(self, amenity):
+        """
+        sets amenities
+        """
+        if isinstance(amenity, Amenity):
+            self.amenity_ids.append(amenity.id)

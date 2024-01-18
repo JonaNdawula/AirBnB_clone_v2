@@ -78,6 +78,15 @@ class DBStorage:
                             res[kyName] = ob
         return res
 
+    def reload(self):
+        """
+        reload
+        """
+        Base.metadata.create_all(self.__engine)
+        Session = scoped_session(
+            sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.session = Session()
+
     def new(self, obj):
         """
         Adds New object
