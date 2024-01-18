@@ -37,11 +37,18 @@ class DBStorage:
 
         self.__engine = create_engine(
             f"mysql+mysqldb://{db_user}:{db_pass}@{db_host}/{db_db}",
-            pool_pre_ping=True
+            pool_pre_ping=True,
         )
 
         if db_env == "test":
-            Base.metadata.drop_all(self.engine)
+            Base.metadata.drop_all(self.__engine)
+    def reload(self):
+        """
+        """
+        Base.metadata.create_all(self.__engine)
+        Session = scoped_session(
+            sessionmaker(bind=self.__engine, expire_on_commit=False))
+        self.__session = Session()
 
     def all(self, cls=None, id=None):
         """
@@ -77,16 +84,7 @@ class DBStorage:
                             kyName = name_of_class + "." + str(ob.id)
                             res[kyName] = ob
         return res
-
-    def reload(self):
-        """
-        reload
-        """
-        Base.metadata.create_all(self.__engine)
-        Session = scoped_session(
-            sessionmaker(bind=self.__engine, expire_on_commit=False))
-        self.session = Session()
-
+    
     def new(self, obj):
         """
         Adds New object

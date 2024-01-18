@@ -32,7 +32,7 @@ class BaseModel:
                     date = datetime.datetime.strptime(
                         value, "%Y-%m-%dT%H:%M:%S.%f")
                     setattr(self, key, date)
-                elif key != "__class___":
+                elif key != "__class__":
                     setattr(self, key, value)
 
     def __str__(self):
