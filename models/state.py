@@ -15,7 +15,7 @@ class State(BaseModel):
     __tablename__ = 'states'
     if str_type == "db":
         name = Column(String(128), nullable=False)
-        cities = relationship('City', coscade="all,delete", backref="state")
+        cities = relationship('City', cascade="all,delete", backref="state")
     else:
         name = ""
 
