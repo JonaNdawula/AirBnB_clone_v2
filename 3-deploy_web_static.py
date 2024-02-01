@@ -13,7 +13,8 @@ def do_pack():
     """
     """
     date_time = datetime.utcnow()
-    myfile = "versions/web_static_{}{}{}{}{}{}.tgz".format(date_time.year,
+    myfile = "versions/web_static_{}{}{}{}{}{}.tgz".format(
+        date_time.year,
         date_time.month,
         date_time.day,
         date_time.hour,
@@ -25,7 +26,6 @@ def do_pack():
     if local("tar -cvzf {} web_static".format(myfile)).failed is True:
         return None
     return myfile
-
 
 
 def do_deploy(archive_path):
@@ -53,7 +53,8 @@ def do_deploy(archive_path):
     if run("rm /tmp/{}".format(myfile)).failed is True:
         return False
     if run("mv /data/web_static/releases/{}/web_static/* "
-           "/data/web_static/releases/{}/".format(f_name, f_name)).failed is True:
+           "/data/web_static/releases/{}/".
+           format(f_name, f_name)).failed is True:
         return False
     if run("rm -rf /data/web_static/releases/{}/web_static".
            format(f_name)).failed is True:
@@ -64,6 +65,7 @@ def do_deploy(archive_path):
            format(f_name)).failed is True:
         return False
     return True
+
 
 def deploy():
     """
