@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 """
-This script starts a flask 
+This script starts a flask
 Application which listens on port
 5000
 """
@@ -18,12 +18,14 @@ def hello_hbnb_index():
     """
     return 'Hello HBNB!'
 
+
 @myApp.route('/hbnb', strict_slashes=False)
 def display_hbnb():
     """
     Will Display HBNB
     """
     return "HBNB"
+
 
 if __name__ == '__main__':
     myApp.run(host='0.0.0.0', port=5000)
