@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """
-A Python script that starts
-a Flask web application
-and listens on port 5000
+A python script that starts a
+Flask web application using port
+5000
 """
 
 from flask import Flask
+from flask import render_template
 
 myApp = Flask(__name__)
 
@@ -13,7 +14,7 @@ myApp = Flask(__name__)
 @myApp.route('/', strict_slashes=False)
 def hello_hbnb_index():
     """
-    Will display
+    will display
     Hello HBNB!
     """
     return 'Hello HBNB!'
@@ -31,7 +32,7 @@ def display_hbnb():
 @myApp.route('/', strict_slashes=False)
 def display_c(text):
     """
-    Will display
+    will display
     C <text>
     """
     text = text.replace('_', ' ')
@@ -55,7 +56,16 @@ def display_number(n):
     Will display a number
     if n is an integer
     """
-    return f'{n} is a number'
+    return f'{n} is anumber'
+
+
+@myApp.route('/number_template/<int:n>', strict_slashes=False)
+def display_number_and_template(n):
+    """
+    Will dispaly An HTML page
+    if n is an integer
+    """
+    return render_template('5-number.html', n=n)
 
 
 if __name__ == '__main__':
