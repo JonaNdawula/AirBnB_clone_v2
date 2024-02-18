@@ -4,10 +4,11 @@ python script that
 starts a Flask application
 """
 
-from models import *
 from models import storage
+from models import *
 from flask import Flask
 from flask import render_template
+from models.state
 
 myApp = Flask(__name__)
 

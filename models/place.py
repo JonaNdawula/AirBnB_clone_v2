@@ -10,22 +10,22 @@ from os import getenv
 store_type = getenv("HBNB_TYPE_STORAGE")
 
 place_amenity = Table(
-        "place_amenity",
-        Base.metadata,
-        Column(
-            "place_id",
-            String(60),
-            ForeignKey("places.id"),
-            primary_key=True,
-            nullable=False,
-        ),
-        Column(
-            "amenity_id",
-            String(60),
-            ForeignKey("amenities.id"),
-            primary_key=True,
-            nullable=False,
-        ),
+    "place_amenity",
+    Base.metadata,
+    Column(
+        "place_id",
+        String(60),
+        ForeignKey("places.id"),
+        primary_key=True,
+        nullable=False,
+    ),
+    Column(
+        "amenity_id",
+        String(60),
+        ForeignKey("amenities.id"),
+        primary_key=True,
+        nullable=False,
+     ),
 )
 
 
@@ -49,7 +49,6 @@ class Place(BaseModel, Base):
             viewonly=False,
             back_populates="place_amenities")
         reviews = relationship('Review', cascade="all,delete", backref="place")
-
     else:
         city_id = ""
         user_id = ""
