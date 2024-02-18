@@ -7,7 +7,7 @@ from models.amenity import Amenity
 from models.review import Review
 from os import getenv
 
-str_type = getenv("HBNB_TYPE_STORAGE")
+store_type = getenv("HBNB_TYPE_STORAGE")
 
 place_amenity = Table(
         "place_amenity",
@@ -26,14 +26,14 @@ place_amenity = Table(
             primary_key=True,
             nullable=False,
         ),
-    )
+)
 
 
 class Place(BaseModel, Base):
     """ A place to stay """
 
     __tablename__ = "places"
-    if str_type == "db":
+    if store_type == "db":
         city_id = Column(String(60), ForeignKey("cities.id"), nullable=False)
         user_id = Column(String(60), ForeignKey("users.id"), nullable=False)
         name = Column(String(128), nullable=False)
@@ -63,36 +63,36 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-    @property
-    def amenities(self):
-        """
-        gets doc
-        """
-        from models import storage
-        amens = []
-        allAmens = storage.all(Amenity)
-        for amen in allAmens.values():
-            if amen.id in self.amenity_ids:
-                amens.append(amen)
-        return amens
+        @property
+        def amenities(self):
+            """
+            gets doc
+            """
+            from models import storage
+            amens = []
+            allAmens = storage.all(Amenity)
+            for amen in allAmens.values():
+                if amen.id in self.amenity_ids:
+                    amens.append(amen)
+            return amens
 
-    @property
-    def reviews(self):
-        """
-        gets doc
-        """
-        from models import storage
-        list_of_reviews = []
-        all_reviews = storage.all(Review)
-        for review in all_reviews.values():
-            if review.place_id in self.id:
-                list_of_review.append(review)
-        return list_of_reviews
+        @property
+        def reviews(self):
+            """
+            gets doc
+            """
+            from models import storage
+            list_of_reviews = []
+            all_reviews = storage.all(Review)
+            for review in all_reviews.values():
+                if review.place_id in self.id:
+                    list_of_reviews.append(review)
+            return list_of_reviews
 
-    @amenities.setter
-    def amenities(self, amenity):
-        """
-        sets amenities
-        """
-        if isinstance(amenity, Amenity):
-            self.amenity_ids.append(amenity.id)
+        @amenities.setter
+        def amenities(self, amenity):
+            """
+            sets amenities
+            """
+            if isinstance(amenity, Amenity):
+                self.amenity_ids.append(amenity.id)

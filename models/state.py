@@ -6,14 +6,15 @@ from sqlalchemy.orm import relationship
 from models.city import City
 from os import getenv
 
-str_type = getenv("HBNB_TYPE_STORAGE")
+store_type = getenv("HBNB_TYPE_STORAGE")
+
 
 
 class State(BaseModel):
     """ State class """
 
     __tablename__ = 'states'
-    if str_type == "db":
+    if store_type == "db":
         name = Column(String(128), nullable=False)
         cities = relationship('City', cascade="all,delete", backref="state")
     else:

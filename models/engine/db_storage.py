@@ -6,12 +6,13 @@ for hbnb clone
 """
 from models.user import User
 from models.place import Place
-from models.city import City
 from models.state import State
+from models.city import City
 from models.amenity import Amenity
 from models.review import Review
 from models.base_model import Base
 from os import getenv
+import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 
@@ -68,7 +69,7 @@ class DBStorage:
                     kyName = Name_of_class + "." + str(ob.id)
                     res[kyName] = ob
             else:
-                for ob in self.session.query(cls).all():
+                for ob in self.__session.query(cls).all():
                     Name_of_class = ob.__class__.__name__
                     kyName = Name_of_class + "." + str(ob.id)
                     res[kyName] = ob
@@ -80,11 +81,11 @@ class DBStorage:
                         Name_of_class = ob.__class__.__name__
                         kyName = Name_of_class + "." + str(ob.id)
                         res[kyName] = ob
-                    else:
-                        for ob in self.__session.query(css).all():
-                            Name_of_class = ob.__class__.__name__
-                            kyName = Name_of_class + "." + str(ob.id)
-                            res[kyName] = ob
+                else:
+                    for ob in self.__session.query(css).all():
+                        Name_of_class = ob.__class__.__name__
+                        kyName = Name_of_class + "." + str(ob.id)
+                        res[kyName] = ob
         return res
 
     def search(self, cls, id):

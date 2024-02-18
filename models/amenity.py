@@ -5,13 +5,13 @@ from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from os import getenv
 
-str_type = getenv("HBNB_TYPE_STORAGE")
+store_type = getenv("HBNB_TYPE_STORAGE")
 
 
 class Amenity(BaseModel, Base):
     """ document doc"""
     __tablename__ = 'amenities'
-    if str_type == 'db':
+    if store_type == 'db':
         name = Column(String(128), nullable=False)
         place_amenities = relationship(
             'Place', secondary='place_amenity',
